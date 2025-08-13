@@ -4,7 +4,7 @@ set -e
 echo "🚀 Setting up devcontainer..."
 
 # Fix for git dubious ownership issue in Codespaces
-git config --global --add safe.directory /workspaces/azle-hello-world
+git config --global --add safe.directory /workspaces/wchl-ts-workshop
 
 # Install Azle CLI
 echo "🔗 Installing Azle CLI..."
@@ -12,8 +12,7 @@ npm install -g azle@latest
 
 # Install npm dependencies
 echo "📦 Installing npm dependencies..."
-cd ic && npm install
-cd ..
+npm install
 
 # Set up dfx identity for codespace
 echo "🔑 Setting up dfx identity..."
