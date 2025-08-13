@@ -1,13 +1,25 @@
 {
-    "scripts": {
-        "pretest": "tsx test/pretest.ts",
-        "test": "jest"
-    },
-    "dependencies": {
-        "azle": "^0.32.0"
-    },
-    "devDependencies": {
-        "jest": "^30.0.2",
-        "ts-jest": "^29.4.0"
-    }
+  "name": "azle-workspace",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "build": "dfx build --check",
+    "lint": "eslint .",
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.33.0",
+    "eslint": "^9.33.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.20",
+    "globals": "^16.3.0",
+    "prettier": "^3.6.2",
+    "typescript": "^5.9.2",
+    "typescript-eslint": "^8.39.1"
+  }
 }

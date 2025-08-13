@@ -15,7 +15,8 @@
       "extensions": [
         "GitHub.copilot",
         "dbaeumer.vscode-eslint",
-        "esbenp.prettier-vscode"
+        "esbenp.prettier-vscode",
+        "dfinity-foundation.vscode-motoko"
       ],
       "settings": {
         "chat.promptFiles": true,
