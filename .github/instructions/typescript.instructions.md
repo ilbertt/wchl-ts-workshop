@@ -1,5 +1,5 @@
 ---
-applyTo: "**/*.tsx"
+applyTo: "**/*.ts,**/*.tsx"
 ---
 
 // TODO
