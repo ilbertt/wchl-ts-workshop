@@ -1,7 +1,7 @@
 {
   "name": "Azle IC Dev Environment",
   "image": "ghcr.io/dfinity/icp-dev-env-azle:latest",
-  "forwardPorts": [4943, 5173, 11434],
+  "forwardPorts": [4943],
   "portsAttributes": {
     "4943": {
       "label": "dfx",
@@ -15,33 +15,24 @@
       "extensions": [
         "GitHub.copilot",
         "dbaeumer.vscode-eslint",
-        "esbenp.prettier-vscode",
-        "dfinity-foundation.vscode-motoko"
+        "esbenp.prettier-vscode"        
       ],
       "settings": {
         "chat.promptFiles": true,
         "editor.formatOnSave": true,
         "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "typescript.tsdk": "./node_modules/typescript/lib",
         "github.copilot.chat.codeGeneration.instructions": [
           {
             "file": "general.instructions.md"
-          },
-          {
-            "file": "python.instructions.md"
-          },
+          },          
           {
             "file": "typescript.instructions.md"
           }
-        ],
-        "github.copilot.chat.testGeneration.instructions": [
-          {
-            "file": "test.instructions.md"
-          }
-        ],
+        ],        
         "settingsSync.ignoredExtensions": ["*"],
         "settingsSync.ignoredSettings": [
-          "github.copilot.chat.codeGeneration.instructions",
-          "github.copilot.chat.testGeneration.instructions"
+          "github.copilot.chat.codeGeneration.instructions"          
         ]
       }
     }
