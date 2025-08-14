@@ -15,7 +15,8 @@
       "extensions": [
         "GitHub.copilot",
         "dbaeumer.vscode-eslint",
-        "esbenp.prettier-vscode"        
+        "esbenp.prettier-vscode",
+        "dfinity-foundation.vscode-motoko"
       ],
       "settings": {
         "chat.promptFiles": true,
@@ -25,14 +26,14 @@
         "github.copilot.chat.codeGeneration.instructions": [
           {
             "file": "general.instructions.md"
-          },          
+          },
           {
             "file": "typescript.instructions.md"
           }
-        ],        
+        ],
         "settingsSync.ignoredExtensions": ["*"],
         "settingsSync.ignoredSettings": [
-          "github.copilot.chat.codeGeneration.instructions"          
+          "github.copilot.chat.codeGeneration.instructions"
         ]
       }
     }
