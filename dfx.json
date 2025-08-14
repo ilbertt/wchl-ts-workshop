@@ -1,9 +1,20 @@
 {
   "canisters": {
-    "hello_world": {
+    "backend": {
       "type": "azle",
       "main": "backend/src/index.ts",
-      "candid": "backend/hello_world.did"
+      "candid": "backend/hello_world.did",
+      "declarations": {
+        "bindings": ["js", "ts"],
+        "output": "./src/declarations/backend"
+      }
+    },
+    "frontend": {
+      "dependencies": ["backend"],
+      "source": ["frontend/dist"],
+      "type": "assets",
+      "workspace": "frontend"
     }
-  }
+  },
+  "output_env_file": "frontend/.env"
 }

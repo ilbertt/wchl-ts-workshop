@@ -2,3 +2,4 @@
 .dfx/
 package-lock.json
 .github/instructions/
+**/declarations/

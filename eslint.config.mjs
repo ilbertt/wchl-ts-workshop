@@ -7,7 +7,7 @@ import tseslint from 'typescript-eslint';
 import { globalIgnores } from 'eslint/config';
 
 export default tseslint.config([
-  globalIgnores(['dist', '.azle']),
+  globalIgnores(['dist', '.azle', '**/declarations']),
   {
     files: ['backend/**/*.ts'],
     extends: [
