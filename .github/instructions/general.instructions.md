@@ -7,13 +7,13 @@ applyTo: "**"
 ## Project Context
 
 - This is an Internet Computer Protocol (ICP) project using Typescript for canister development with Azle Development Kit.
-- The backend is tested with Jest.
 - There isn't a frontend, since this is a Web API project.
 
 ## Code Quality & Formatting
 
 - We use `prettier` for formatting and linting **TypeScript** code.
 - Run `npm run format` for formatting typescript.
+- Run `npm run lint` for linting typescript.
 
 ## AI Assistance
 
