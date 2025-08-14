@@ -1,4 +1,6 @@
-# Azle Hello World
+# Todo App Example - Azle
+
+This template gives a simple example of a todo app built with the [Azle framework](https://demergent-labs.github.io/azle).
 
 - [Installation](#installation)
 - [Deployment](#deployment)
@@ -8,90 +10,45 @@ Azle helps you to build secure decentralized/replicated servers in TypeScript or
 
 Azle stable mode is continuously subjected to [intense scrutiny and testing](https://github.com/demergent-labs/azle/actions), however it has not yet undergone intense security review.
 
-## Stable Mode
+## Usage
 
-Azle runs in stable mode by default.
+The app contained in this template demonstrates some of the capabilities of Azle. The template is organized into the following files:
 
-This mode is intended for production use after Azle's imminent 1.0 release. Its focus is on API and runtime stability, security, performance, TypeScript and JavaScript language support, the ICP APIs, and Candid remote procedure calls (RPC). There is minimal support for the Node.js standard library, npm ecosystem, and HTTP server functionality.
+- [`backend/`](./backend) - The source code for the backend canister, built using Azle.
+- [`frontend/`](./frontend) - The source code for the frontend, built using React and Vite.
+- [`shared/`](./shared) - The TypeScript code shared between the backend and frontend.
 
-## Installation
+### Useful commands
 
-> Windows is only supported through a Linux virtual environment of some kind, such as [WSL](https://learn.microsoft.com/en-us/windows/wsl/install)
+- `npm run build` - Build both the backend and frontend canisters, without deploying them.
+- `npm run format` - Format the code using the Prettier.
+- `npm run lint` - Lint the code using ESLint.
 
-You will need [Node.js](#nodejs) and [dfx](#dfx) to develop ICP applications with Azle:
+Additionally, in the `frontend/` directory, you can run the following commands:
 
-### Node.js
+- `npm run dev` - Start the frontend in development mode. You should run `dfx deploy backend` from the root directory before running this command, in order to have the backend canister API deployed and available to the frontend.
+- `npm run prebuild` - Generate the backend canister API bindings in JS/TS format and places them in the `frontend/src/declarations/` directory. You should run this command before running `npm run dev`, in order to have the backend canister API available to the frontend.
+- `npm run build` - Build the frontend in production mode. This runs the `npm run prebuild` command automatically.
 
-It's recommended to use nvm to install the latest LTS version of Node.js:
+## Development
 
-```bash
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
-```
+To set up and run the example app locally, you can follow these steps:
 
-Restart your terminal and then run:
+1. Click "Use Template" button on the GitHub repository page to create your own repository.
+2. Open the repository as a **VS Code Codespace** (instructions [here](https://docs.github.com/en/codespaces/developing-in-a-codespace/using-github-codespaces-in-visual-studio-code)).
+3. Wait for the codespace to be ready. This will run the `devcontainer-setup.sh` script.
+4. Start a local ICP replica:
+   ```bash
+   dfx start --clean
+   ```
+5. Deploy both the backend and frontend canisters:
+   ```bash
+   dfx deploy
+   ```
+6. Open the frontend in your browser, following the link in the output of the `dfx deploy` command. The link will look something like `http://{canister-frontend-id}.localhost:4943/`
 
-```bash
-nvm install --lts
-```
+Any time you make changes to either the backend or frontend, you should run the `dfx deploy` command again to redeploy the canisters.
 
-Check that the installation went smoothly by looking for clean output from the following command:
+## License
 
-```bash
-node --version
-```
-
-### dfx
-
-Install the dfx command line tools for managing ICP applications:
-
-```bash
-DFX_VERSION=0.27.0 sh -ci "$(curl -fsSL https://internetcomputer.org/install.sh)"
-```
-
-Check that the installation went smoothly by looking for clean output from the following command:
-
-```bash
-dfx --version
-```
-
-## Deployment
-
-To create and deploy a simple sample application called `hello_world`:
-
-```bash
-# create a new default project called hello_world
-npx azle new hello_world
-cd hello_world
-```
-
-```bash
-# install all npm dependencies including azle
-npm install
-```
-
-```bash
-# start up a local ICP replica
-dfx start --clean
-```
-
-In a separate terminal in the `hello_world` directory:
-
-```bash
-# deploy your canister
-dfx deploy
-```
-
-## Testing
-
-If you would like to run the included test suite:
-
-```bash
-# start up a local ICP replica
-dfx start --clean
-```
-
-In a separate terminal in the `hello_world` directory:
-
-```bash
-npm test
-```
+The template is licensed under the **MIT License**. See the [LICENSE](./LICENSE) file for details.
