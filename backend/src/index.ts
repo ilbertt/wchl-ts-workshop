@@ -1,11 +1,19 @@
 import { IDL, query, time, trap, update } from 'azle';
-import type { TodoItemType, TodoItemIdType } from 'shared/src/todos';
+import type {
+  TodoItemType,
+  TodoItemIdType,
+  UpdateTodoItemInputType,
+} from 'shared/src/todos';
 
 const TodoItem = IDL.Record({
   id: IDL.Nat32,
   content: IDL.Text,
   completed: IDL.Bool,
   createdAt: IDL.Text,
+});
+const UpdateTodoItemInput = IDL.Record({
+  id: IDL.Nat32,
+  completed: IDL.Opt(IDL.Bool),
 });
 
 export default class {
@@ -39,6 +47,17 @@ export default class {
 
     this.todos.set(id, newTodo);
     return id;
+  }
+
+  @update([UpdateTodoItemInput])
+  updateTodo(input: UpdateTodoItemInputType): void {
+    const todoItem = this.getTodo(input.id);
+
+    if (input.completed[0] !== undefined) {
+      todoItem.completed = input.completed[0];
+    }
+
+    this.todos.set(input.id, todoItem);
   }
 
   randomId(): number {
