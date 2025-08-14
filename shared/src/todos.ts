@@ -6,3 +6,8 @@ export type TodoItemType = {
   completed: boolean;
   createdAt: string;
 };
+
+export type UpdateTodoItemInputType = {
+  id: TodoItemIdType;
+  completed: [] | [boolean];
+};

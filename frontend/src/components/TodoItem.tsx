@@ -1,7 +1,7 @@
 import './TodoItem.css';
 
 import type { TodoItemType } from 'shared/src/todos';
-// import { backend } from '../declarations/backend';
+import { backend } from '../declarations/backend';
 
 type Props = {
   item: TodoItemType;
@@ -9,9 +9,11 @@ type Props = {
 };
 
 export const TodoItem: React.FC<Props> = ({ item, onToggleCompleted }) => {
-  const handleToggleCompletion = () => {
-    // Logic to toggle completion status
-    // This could involve calling a backend function to update the todo item
+  const handleToggleCompletion = async () => {
+    await backend.updateTodo({
+      id: item.id,
+      completed: [!item.completed],
+    });
     onToggleCompleted();
   };
 

@@ -8,13 +8,22 @@ import {
   postUpgrade,
   init,
 } from 'azle';
-import type { TodoItemType, TodoItemIdType } from 'shared/src/todos';
+import type {
+  TodoItemType,
+  TodoItemIdType,
+  UpdateTodoItemInputType,
+} from 'shared/src/todos';
 
 const TodoItem = IDL.Record({
   id: IDL.Nat32,
   content: IDL.Text,
   completed: IDL.Bool,
   createdAt: IDL.Text,
+});
+
+const UpdateTodoItemInput = IDL.Record({
+  id: IDL.Nat32,
+  completed: IDL.Opt(IDL.Bool),
 });
 
 export default class {
@@ -35,7 +44,7 @@ export default class {
     return Array.from(this.todos.values());
   }
 
-  @query([IDL.Text], TodoItem)
+  @query([IDL.Nat32], TodoItem)
   getTodo(id: TodoItemIdType): TodoItemType {
     const todo = this.todos.get(id);
     if (!todo) {
@@ -60,6 +69,17 @@ export default class {
     console.log(`New todos count: ${this.todosCount}`);
 
     return id;
+  }
+
+  @update([UpdateTodoItemInput])
+  updateTodo(input: UpdateTodoItemInputType) {
+    const todo = this.getTodo(input.id);
+
+    if (input.completed[0] !== undefined) {
+      todo.completed = input.completed[0];
+    }
+
+    this.todos.insert(input.id, todo);
   }
 
   randomId(): number {
