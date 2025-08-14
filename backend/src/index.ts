@@ -1,4 +1,13 @@
-import { IDL, query, time, trap, update } from 'azle';
+import {
+  IDL,
+  query,
+  time,
+  trap,
+  update,
+  StableBTreeMap,
+  postUpgrade,
+  init,
+} from 'azle';
 import type { TodoItemType, TodoItemIdType } from 'shared/src/todos';
 
 const TodoItem = IDL.Record({
@@ -9,7 +18,17 @@ const TodoItem = IDL.Record({
 });
 
 export default class {
-  todos: Map<TodoItemIdType, TodoItemType> = new Map();
+  todos: StableBTreeMap<TodoItemIdType, TodoItemType> = new StableBTreeMap(0);
+
+  get todosCount(): number {
+    return this.todos.len();
+  }
+
+  @init()
+  @postUpgrade()
+  initMessage(): void {
+    console.log(`Todos count = ${this.todosCount}`);
+  }
 
   @query([], IDL.Vec(TodoItem))
   listTodos(): Array<TodoItemType> {
@@ -26,7 +45,7 @@ export default class {
   }
 
   @update([IDL.Text], IDL.Nat32)
-  addTodo(content: string): TodoItemIdType {
+  createTodo(content: string): TodoItemIdType {
     this.validateTodoContent(content);
 
     const id = this.randomId();
@@ -37,11 +56,15 @@ export default class {
       createdAt: this.currentDate().toISOString(),
     };
 
-    this.todos.set(id, newTodo);
+    this.todos.insert(id, newTodo);
+    console.log(`New todos count: ${this.todosCount}`);
+
     return id;
   }
 
   randomId(): number {
+    // NOTE: this is not cryptographically secure randomness
+    // but sufficient for generating unique IDs in this context
     return Math.floor(Math.random() * 1_000_000_000);
   }
 

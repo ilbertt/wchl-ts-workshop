@@ -1,5 +1,5 @@
 service: () -> {
-    addTodo: (text) -> (nat32);
+    createTodo: (text) -> (nat32);
     getTodo: (text) -> (record {id:nat32; content:text; createdAt:text; completed:bool}) query;
     listTodos: () -> (vec record {id:nat32; content:text; createdAt:text; completed:bool}) query;
 }
