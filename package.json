@@ -4,7 +4,8 @@
   "version": "1.0.0",
   "workspaces": [
     "backend",
-    "frontend"
+    "frontend",
+    "shared"
   ],
   "scripts": {
     "build": "dfx build --check",

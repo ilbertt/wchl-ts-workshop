@@ -13,6 +13,18 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+main img {
+  max-width: 300px;
+  height: auto;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

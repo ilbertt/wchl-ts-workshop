@@ -15,7 +15,8 @@
     "@dfinity/candid": "^2.4.1",
     "@dfinity/principal": "^2.4.1",
     "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+    "react-dom": "^19.1.1",
+    "shared": "^0.0.0"
   },
   "devDependencies": {
     "@types/react": "^19.1.10",

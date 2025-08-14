@@ -1,16 +1,61 @@
-import { IDL, query, update } from 'azle';
+import { IDL, query, time, trap, update } from 'azle';
+import type { TodoItemType, TodoItemIdType } from 'shared/src/todos';
+
+const TodoItem = IDL.Record({
+  id: IDL.Nat32,
+  content: IDL.Text,
+  completed: IDL.Bool,
+  createdAt: IDL.Text,
+});
 
 export default class {
-  message: string = 'Hello world!';
+  todos: Map<TodoItemIdType, TodoItemType> = new Map();
 
-  @query([], IDL.Text)
-  getMessage(): string {
-    return this.message;
+  @query([], IDL.Vec(TodoItem))
+  listTodos(): Array<TodoItemType> {
+    return Array.from(this.todos.values());
   }
 
-  @update([IDL.Text])
-  setMessage(message: string): void {
-    console.log('Setting message to:', message);
-    this.message = message;
+  @query([IDL.Text], TodoItem)
+  getTodo(id: TodoItemIdType): TodoItemType {
+    const todo = this.todos.get(id);
+    if (!todo) {
+      trap(`Todo with id ${id} not found`);
+    }
+    return todo;
+  }
+
+  @update([IDL.Text], IDL.Nat32)
+  addTodo(content: string): TodoItemIdType {
+    this.validateTodoContent(content);
+
+    const id = this.randomId();
+    const newTodo = {
+      id,
+      content,
+      completed: false,
+      createdAt: this.currentDate().toISOString(),
+    };
+
+    this.todos.set(id, newTodo);
+    return id;
+  }
+
+  randomId(): number {
+    return Math.floor(Math.random() * 1_000_000_000);
+  }
+
+  validateTodoContent(text: string): void {
+    if (text.length === 0) {
+      trap('Todo text cannot be empty');
+    }
+    if (text.length > 100) {
+      trap('Todo text cannot exceed 100 characters');
+    }
+  }
+
+  currentDate(): Date {
+    const nanos = time();
+    return new Date(Number(nanos / BigInt(1_000_000)));
   }
 }

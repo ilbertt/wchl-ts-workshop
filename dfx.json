@@ -3,7 +3,7 @@
     "backend": {
       "type": "azle",
       "main": "backend/src/index.ts",
-      "candid": "backend/hello_world.did",
+      "candid": "backend/backend.did",
       "declarations": {
         "bindings": ["js", "ts"],
         "output": "./src/declarations/backend"

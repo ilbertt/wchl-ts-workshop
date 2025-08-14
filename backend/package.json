@@ -3,9 +3,11 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
+    "build": "dfx build --check backend",
     "lint": "cd .. && npm run lint"
   },
   "dependencies": {
-    "azle": "^0.32.0"
+    "azle": "^0.32.0",
+    "shared": "^0.0.0"
   }
 }

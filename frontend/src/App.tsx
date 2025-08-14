@@ -1,23 +1,26 @@
 import { useEffect, useState } from 'react';
 import { backend } from './declarations/backend';
+import type { TodoItemType } from 'shared/src/todos';
+import { TodoItem } from './components/TodoItem';
 
 function App() {
-  const [greeting, setGreeting] = useState('');
+  const [todos, setTodos] = useState<TodoItemType[]>([]);
+
+  function listTodos() {
+    backend.listTodos().then(setTodos);
+  }
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const formInput = (event.target as HTMLFormElement).elements.namedItem(
-      'name',
+      'todoContent',
     ) as HTMLInputElement;
-    const name = formInput.value;
-    backend
-      .setMessage(name)
-      .then(() => backend.getMessage())
-      .then(setGreeting);
+    const todoContent = formInput.value;
+    backend.addTodo(todoContent).then(listTodos);
   }
 
   useEffect(() => {
-    backend.getMessage().then(setGreeting);
+    listTodos();
   }, []);
 
   return (
@@ -26,11 +29,20 @@ function App() {
       <br />
       <br />
       <form action="#" onSubmit={handleSubmit}>
-        <label htmlFor="name">Enter your name: &nbsp;</label>
-        <input id="name" alt="Name" type="text" />
-        <button type="submit">Click Me!</button>
+        <label htmlFor="todoContent">Enter your TODO content: &nbsp;</label>
+        <input id="todoContent" alt="Todo Content" type="text" />
+        <button type="submit">Add Todo</button>
       </form>
-      <section id="greeting">{greeting}</section>
+      {todos.length > 0 ? (
+        <div>
+          <h2>Todo List</h2>
+          {todos.map(item => (
+            <TodoItem key={item.id} item={item} onToggleCompleted={listTodos} />
+          ))}
+        </div>
+      ) : (
+        <p>No todos available. Add some!</p>
+      )}
     </main>
   );
 }

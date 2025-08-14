@@ -1,0 +1,10 @@
+.todo-item-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
