@@ -13,16 +13,19 @@ import type {
   TodoItemIdType,
   UpdateTodoItemInputType,
 } from 'shared/src/todos';
+import { v4 as uuidV4 } from 'uuid';
+
+const TodoItemId = IDL.Text;
 
 const TodoItem = IDL.Record({
-  id: IDL.Nat32,
+  id: TodoItemId,
   content: IDL.Text,
   completed: IDL.Bool,
   createdAt: IDL.Text,
 });
 
 const UpdateTodoItemInput = IDL.Record({
-  id: IDL.Nat32,
+  id: TodoItemId,
   completed: IDL.Opt(IDL.Bool),
 });
 
@@ -44,7 +47,7 @@ export default class {
     return Array.from(this.todos.values());
   }
 
-  @query([IDL.Nat32], TodoItem)
+  @query([TodoItemId], TodoItem)
   getTodo(id: TodoItemIdType): TodoItemType {
     const todo = this.todos.get(id);
     if (!todo) {
@@ -53,7 +56,7 @@ export default class {
     return todo;
   }
 
-  @update([IDL.Text], IDL.Nat32)
+  @update([IDL.Text], TodoItemId)
   createTodo(content: string): TodoItemIdType {
     this.validateTodoContent(content);
 
@@ -82,10 +85,8 @@ export default class {
     this.todos.insert(input.id, todo);
   }
 
-  randomId(): number {
-    // NOTE: this is not cryptographically secure randomness
-    // but sufficient for generating unique IDs in this context
-    return Math.floor(Math.random() * 1_000_000_000);
+  randomId(): string {
+    return uuidV4();
   }
 
   validateTodoContent(text: string): void {

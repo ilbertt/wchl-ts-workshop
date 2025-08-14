@@ -1,6 +1,6 @@
 service: () -> {
-    createTodo: (text) -> (nat32);
-    getTodo: (nat32) -> (record {id:nat32; content:text; createdAt:text; completed:bool}) query;
-    listTodos: () -> (vec record {id:nat32; content:text; createdAt:text; completed:bool}) query;
-    updateTodo: (record {id:nat32; completed:opt bool}) -> ();
+    createTodo: (text) -> (text);
+    getTodo: (text) -> (record {id:text; content:text; createdAt:text; completed:bool}) query;
+    listTodos: () -> (vec record {id:text; content:text; createdAt:text; completed:bool}) query;
+    updateTodo: (record {id:text; completed:opt bool}) -> ();
 }

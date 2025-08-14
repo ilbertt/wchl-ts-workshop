@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "azle": "^0.32.0",
-    "shared": "^0.0.0"
+    "shared": "^0.0.0",
+    "uuid": "^11.1.0"
   }
 }

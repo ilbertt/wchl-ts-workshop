@@ -1,4 +1,4 @@
-export type TodoItemIdType = number;
+export type TodoItemIdType = string;
 
 export type TodoItemType = {
   id: TodoItemIdType;
