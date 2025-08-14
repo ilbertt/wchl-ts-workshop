@@ -2,9 +2,8 @@
 
 This template gives a simple example of a todo app built with the [Azle framework](https://demergent-labs.github.io/azle).
 
-- [Installation](#installation)
-- [Deployment](#deployment)
-- [Testing](#testing)
+- [Usage](#usage)
+- [Development](#development)
 
 Azle helps you to build secure decentralized/replicated servers in TypeScript or JavaScript on [ICP](https://internetcomputer.org/). The current replication factor is [13-40 times](https://dashboard.internetcomputer.org/subnets).
 
