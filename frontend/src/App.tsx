@@ -10,13 +10,14 @@ function App() {
     backend.listTodos().then(setTodos);
   }
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const formInput = (event.target as HTMLFormElement).elements.namedItem(
       'todoContent',
     ) as HTMLInputElement;
     const todoContent = formInput.value;
-    backend.addTodo(todoContent).then(listTodos);
+    await backend.createTodo(todoContent).then(listTodos);
+    formInput.value = ''; // Clear input after submission
   }
 
   useEffect(() => {

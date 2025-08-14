@@ -7,8 +7,7 @@
     "dev": "vite",
     "prebuild": "dfx generate backend",
     "build": "tsc -b && vite build",
-    "lint": "cd .. && npm run lint",
-    "preview": "vite preview"
+    "lint": "cd .. && npm run lint"
   },
   "dependencies": {
     "@dfinity/agent": "^2.4.1",
