@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { backend } from './declarations/backend';
 
 function App() {
@@ -10,8 +10,15 @@ function App() {
       'name',
     ) as HTMLInputElement;
     const name = formInput.value;
-    backend.setMessage(name).then(backend.getMessage).then(setGreeting);
+    backend
+      .setMessage(name)
+      .then(() => backend.getMessage())
+      .then(setGreeting);
   }
+
+  useEffect(() => {
+    backend.getMessage().then(setGreeting);
+  }, []);
 
   return (
     <main>

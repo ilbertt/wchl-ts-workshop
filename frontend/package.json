@@ -11,9 +11,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@dfinity/agent": "^3.2.1",
-    "@dfinity/candid": "^3.2.1",
-    "@dfinity/principal": "^3.2.1",
+    "@dfinity/agent": "^2.4.1",
+    "@dfinity/candid": "^2.4.1",
+    "@dfinity/principal": "^2.4.1",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
   },

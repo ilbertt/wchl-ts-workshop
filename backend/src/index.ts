@@ -10,6 +10,7 @@ export default class {
 
   @update([IDL.Text])
   setMessage(message: string): void {
+    console.log('Setting message to:', message);
     this.message = message;
   }
 }
